@@ -1,0 +1,141 @@
+# !/usr/bin/env python27
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Feb  27 21:39:29 2017
+
+@author: waynetliu
+"""
+
+# Functions
+print "Functions"
+def double(x):
+    """optional doc string
+    where you can specifiy what this does
+    ex: this function multiplies input by 2"""
+    return x*2
+    
+def apply_to_one(f):
+    """calls the function f with 1 as its argument"""
+    return f(1)
+    
+my_double = double
+x = apply_to_one(my_double)
+print x # equals 2
+
+y = apply_to_one(lambda x: x + 4) # equals 5
+print y
+
+def subtract(a=0, b=0):
+    return a - b
+    
+subtract(10, 5) # returns 5
+subtract(0, 5) # returns -5
+subtract(b=5) # returns -5
+
+# Strings
+print "\nStrings"
+tab_string = "\t"
+print len(tab_string) # will return a length of 1
+
+not_tab_string = r'\t'
+print len(not_tab_string) # will return a length of 2, due to raw string
+
+# exceptions
+print "\nExceptions"
+try:
+    print 0 / 0
+except ZeroDivisionError:
+    print "Cannot divide by zero, derp"
+    
+# Arrays
+print "\nArrays"
+x = range(10) # is list [0..9]
+zero = x[0]
+one = x[1]
+nine = x[-1]
+eight = x[-2]
+x[0] = -1
+print x
+
+## slicing
+first_three = x[:3]     # [-1,1,2]
+three_to_end = x[3:]    # [3..9]
+one_to_four = x[1:5]    # [1,2,3,4]
+last_three = x[-3:]     # [7,8,9]
+without_first_and_last = x[1:-1] # [1..8]
+copy_of_x = x[:]        # [-1,1..9]
+
+1 in [1, 2, 3] # true
+0 in [1, 2, 3] # false
+
+x = [1, 2, 3]
+x.extend([4, 5, 6]) # now x is [1..6]
+
+y = x + [4, 5, 6] # y will be [1..6] and x unchanged
+print y
+
+## unpack
+x, y = [1, 2]
+_, y = [1, 2] # use underscore for throwaway
+print x, y
+
+# Tuples
+print "\nTuples" # they are immutable, cannot modify
+my_list = [1, 2]
+my_tuple = (1, 2)
+other_tuple = 3, 4
+my_list[1] = 3 # now my_list is [1, 3]
+print "my_tuple:", my_tuple
+
+try:
+    my_tuple[1] = 3
+except TypeError: # will get type error when trying to modify a tuple
+    print "Cannot modify a tuple"
+    
+def sum_and_product(x, y):
+    return (x + y), (x * y) # convenient way to return multiple values from fxns
+
+sp = sum_and_product(2, 3) # equals (5, 6)
+s, p = sum_and_product(5, 10) # equals s=15 and p = 50
+print "sum=", s, "product=", p
+
+x, y = 1, 2 # can be used for multiple assignment
+x, y = y, x # Pythonic way for swapping variables x is now 2 and y is 1
+
+# Dictionaries
+print "\nDictionaries"
+empty_dict = {}
+grades = { "Joel" : 80, "Tim" : 95 }
+print grades
+
+joels_grade = grades["Joel"] # equals 80
+print "joel's grade:", joels_grade
+
+try:
+    kates_grade = grades["Kate"]
+except KeyError:
+    print "No grade for Kate, KeyError"
+
+joel_has_grade = "Joel" in grades # True, can check for Keys
+
+joels_grade = grades.get("Joel", 0) # either Joel's grade or 0 whichever exists
+kates_grade = grades.get("Kate", 0) # returns 0, no Kate
+no_ones_grade = grades.get("No one") # default return None
+
+grades["Tim"] = 99 # replaces old value
+grades["Kate"] = 100 # adds new value
+num_students = len(grades)
+print "number of students in gradebook:", num_students
+
+tweet = {
+    "user" : "joelgrus",
+    "text" : "Data Science is Awesome",
+    "retweet_count" : 100,
+    "hashtags" : ["#data", "#science", "#datascience", "#awesome", "#yolo"]
+}
+
+tweet_keys = tweet.keys() # list of keys
+print "tweet keys:", tweet_keys
+tweet_values = tweet.values() # list of values
+tweet_items = tweet.items() # list of (key, value) tuples
+print "tweet items:", tweet_items
