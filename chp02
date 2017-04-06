@@ -139,3 +139,51 @@ print "tweet keys:", tweet_keys
 tweet_values = tweet.values() # list of values
 tweet_items = tweet.items() # list of (key, value) tuples
 print "tweet items:", tweet_items
+
+
+# 20170406THU
+#defaut dict
+word_counts = {}
+for word in document:
+    if word in word_counts:
+        word_counts[word] += 1
+    else:
+        word_counts[word] = 1
+        
+# or you can handle the expection first
+for word in document:
+    try:
+        word_counts[word] += 1
+    except KeyError:
+        word_counts[word] = 1
+        
+# or you can use get
+for word in document:
+    previous_count = word_counts.get(word, 0)
+    word_counts[word] = previous_count + 1
+    
+# or use default dict
+from collections import defaultdict
+word_counts = defaultdict(int) # int() produces 0
+for word in document:
+    word_counts[word] += 1
+
+dd_list = defaultdict(list) # produces empty list
+dd_list[0].append(99) # for key 0, there is a list with value 99
+dd_list[3].append(1) # for key 3, there is a list with value 1
+
+dd_dict = defaultdict(dict)
+dd_dict["Joel"]["City"] = "Seattle"
+
+dd_pair = defaultdict(lambda : [0, 0])
+dd_pair[4][1] = 1
+
+# counters
+from collections import Counter
+c = Counter([0, 1, 2, 0, 2, 9, 9, 9, 9])
+# so you would just do:
+word_counts = Counter(document)
+
+# prints 10 most common words and counts with most_common method in Counter
+for word, count in c.most_common(3):
+    print "word:", word, "count:", count
