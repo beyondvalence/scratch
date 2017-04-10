@@ -187,3 +187,79 @@ word_counts = Counter(document)
 # prints 10 most common words and counts with most_common method in Counter
 for word, count in c.most_common(3):
     print "word:", word, "count:", count
+
+# Sets pg52
+s = set()
+s.add(1)
+s.add(2)
+len(s) # length will be 2
+s.add(1) 
+len(s) # length will still be 2
+2 in s # true
+3 in s # false
+
+# to check membership, easier to take a set of a list
+# then check the set, helps find distinct elements
+
+# Control Flow pg 53
+# if statements
+parity = "even" if x % 2 == 0 else "odd"
+# while statements
+x = 10
+while x < 10:
+    print x, "is less than 10"
+    x += 1
+    
+# for and in statements
+for x in range(10):
+    print x, "is less than 10"
+    
+# also use continue to move to next iteration
+# and break to quit loop
+for x in range(10):
+    if x == 3:
+        continue
+    elif x == 5:
+        break
+    print x
+# will print 0, 1, 2, 4
+
+# Truthiness pg 54
+# Booleans are capitalized, True and False
+one_test = 1 < 2 # True
+true_test = True == False # False
+
+# None is used as an non-existent value
+x = None
+print x == None # True, but not Pythonic
+print x is None # True, and more Pythonic
+
+# there are lots of False-like values
+# Such as: False, None, [ ], { }, "", set(), 0, 0.0
+# Generally, other values get treated as True
+
+s = some_function_that_returns_a_string()
+if s:
+    first_char = s[0]
+else:
+    first_char = ""
+
+# simpler way
+first_char = s and s[0]
+# since and returns the second argument if the first is true
+
+x = 55
+safe_x = x or 0
+# safe_x is definitely a number
+# if x is truthy, then it will take on x
+# if x = None, then safe_x = 0
+
+# all() is True when all elements are truthy, or no elements are falsy
+# any() is true when one or more elements are truthy
+all([True, 1, {9}]) # True
+all([True, 1, {}]) # False, {} is falsy
+any([True, 1, {}]) # True, True is truthy
+all([]) # True, no falsy elements
+any([]) # False, no truthy elements
+
+# Sorting pg 57
