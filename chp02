@@ -182,7 +182,7 @@ dd_pair[4][1] = 1
 from collections import Counter
 c = Counter([0, 1, 2, 0, 2, 9, 9, 9, 9])
 # so you would just do:
-word_counts = Counter(document)
+word_counts = Counter(c)
 
 # prints 10 most common words and counts with most_common method in Counter
 for word, count in c.most_common(3):
@@ -263,3 +263,16 @@ all([]) # True, no falsy elements
 any([]) # False, no truthy elements
 
 # Sorting pg 57
+x = [4, 1, 2, 3]
+y = sorted(x) # is now [1, 2, 3, 4]
+x.sort() # is now [1, 2, 3, 4]
+# can specify reverse=True for largest to smallest
+
+# also can compare results of a function with key:
+# sort the list by absolute value from largest to smallest
+x = sorted([-4,1,-2,3], key=abs, reverse=True) # is [-4,3,-2,1]
+
+# sort the words and counts from highest count to lowest
+x = sorted(word_counts.items(),
+           key=lambda (word, count): count,
+           reverse=True)
