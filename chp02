@@ -300,3 +300,20 @@ increasing_pairs = [(x, y) for x in range(10) for y in range(x + 1, 10)]
 # (0,0), (0,1) to (6,9), (7,8), (7,9), (8,9)
 
 # Generators and Iterators pg 59
+def lazy_range(n):
+    """a lazy version of things"""
+    i = 0
+    while i < n:
+        yield i
+        i += 1
+# using lazy_range will consume the yielded values until none are left
+# in Python 3, range is lazy, Python 27 xrange is lazy
+# limitation: can only iterate through a generator once, need to recreate or use list
+
+# can also create generators using for list comprehension in parentheses
+lazy_evens_below_20 = (i for i in lazy_range(20) if i % 2 == 0)
+
+# for dict, use iteritems() method lazily yields key:value pairs one at a time,
+# instead of items()
+square_dict = {x: x * x for x in range(5)}
+square_values = [y for (x, y) in square_dict.iteritems()]
