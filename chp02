@@ -276,3 +276,27 @@ x = sorted([-4,1,-2,3], key=abs, reverse=True) # is [-4,3,-2,1]
 x = sorted(word_counts.items(),
            key=lambda (word, count): count,
            reverse=True)
+
+# List Comprehensions pg 58
+# can choose certain elements or transform them into a list
+
+even_numbers = [x for x in range(5) if x % 2 == 0] # is [0, 2, 4]
+squares = [x * x for x in range(5)] # [0, 1, 4, 9, 16]
+even_squares = [x * x for x in even_numbers] # [0, 4, 16]
+
+# can turn lists into dictionaries or sets
+square_dict = {x: x * x for x in range(5)}
+
+# if values are not needed, use an underscore
+zeroes = [0 for _ in even_numbers] 
+# iterates through all elements, so same length, but no value used
+
+# list comprehension can use multiple for loops:
+pairs = [(x, y) for x in range(10) for y in range(10)] # 100 pairs (0,0), (0,1) to (9,8), (9,9)
+pairs1 = [(x, y) for y in range(10) for x in range(10)] # 100 pairs (0,0), (1,0) to (8,9), (9,9)
+
+# creates an xy pair where x < y
+increasing_pairs = [(x, y) for x in range(10) for y in range(x + 1, 10)] 
+# (0,0), (0,1) to (6,9), (7,8), (7,9), (8,9)
+
+# Generators and Iterators pg 59
