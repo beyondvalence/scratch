@@ -313,7 +313,18 @@ def lazy_range(n):
 # can also create generators using for list comprehension in parentheses
 lazy_evens_below_20 = (i for i in lazy_range(20) if i % 2 == 0)
 
-# for dict, use iteritems() method lazily yields key:value pairs one at a time,
+# for lazy dict, use iteritems() method lazily yields key:value pairs one at a time,
 # instead of items()
 square_dict = {x: x * x for x in range(5)}
 square_values = [y for (x, y) in square_dict.iteritems()]
+
+# Randomness pg 60
+import random
+four_uniform_randoms = [random.random() for _ in range(4)] # four random numbers (0, 1)
+
+# for reproducibility, set the seed
+random.seed(10) # sets the seed
+print random.random()
+random.seed(10) # resets the seed
+print random.random() # now same as previous
+
