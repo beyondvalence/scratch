@@ -414,4 +414,45 @@ s1.remove(1) # removes 1
 print(s1) # [2, 3, 4, 5, 6]
 
 # Functional Tools, pg 63
+# when passing functions, sometimes we want to partially apply functions
+# called curry to create new functions
+# for example:
+
+def exp(base, power):
+    return base ** power
+    
+# now transform into two to the power N
+def two_to_the(power):
+    return exp(2, power)
+# but can get unwieldly, so use functools
+
+from functools import partial
+two_to_the = partial(exp, 2) # fills in first argument of exp(base, power)
+print two_to_the(3) # 2 ** 3 is 8
+
+# can name argument to replace partially
+square_of = partial(exp, power = 2) # now exp(base, 2)
+print square_of(3) # exp(3, 2) is 9
+
+# can use map, reduce, and filter as alternative to list comphrensions
+def double(x):
+    return x * 2
+    
+xs = [1, 2, 3, 4]
+twice_xs = [double(x) for x in xs] # [2, 4, 6, 8]
+twice_xs = map(double, xs) # same as above, map double onto xs list
+list_doubler = partial(map, double) # assigns double to map(function=double, x)
+twice_xs = list_doubler(xs) # same as above, doubles elements in list
+
+# map multi-argument functions with multiple lists
+def multiply(x, y):
+    return x * y
+products = map(multiply, [1, 2, 3], [4, 5, 6]) # [1*4, 2*5, 3*6]
+print products # [4, 10, 18]
+
+# filter does the list comprehension of if
+def is_even(x):
+    """Return true if x is even, false if x is odd"""
+    return x % 2 == 0
+    
 
