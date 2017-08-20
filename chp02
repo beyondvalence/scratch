@@ -351,3 +351,67 @@ print winning_numbers
 with_replacement = [random.choice(range(10)) for _ in range(4)] # choose 4 from 0..9
 
 # Regular Expressions pg 61
+import re
+print all([ # all true (all is any false elements and any is any true elements)
+    not re.match("a", "cat"), # cat doesn't start with a
+    re.search("a", "cat"), # cat does have a in it
+    not re.search("c", "dog"), # dog doesn't have c in it
+    3 == len(re.split("[ab]", "carbs")), # split by a and b so ['c', 'r', 's']
+    "R-D-" == re.sub("[0-9]", "-", "R2D2") # replace digits with dash 
+    ]) # prints True
+    
+# OOP pg 62
+# create a class 'Set' with member functions to add, remove, and check 
+# if Set contains a certain value
+
+# give class name in PascalCase by convention
+class Set:
+    # these are the member functions
+    # first parameter is 'self'
+    # that refers to particular Set object being used
+    
+    def __init__(self, values = None):
+        """This is called the constructor.
+        It gets called when you create a new Set.
+        You would use it like:
+        s1 = Set() # empty set
+        s2 = Set([1, 2, 2, 3, 4]) # initialize with values"""
+        
+        self.dict = {} # each instance of Set has its own dictionary
+        # which is what we'll use to track memberships
+        
+        if values is not None:
+            for value in values:
+                self.add(value)
+                
+    def __repr__(self):
+        """This is the string representation of a Set object
+        if you type it in the Python prompt or print(Set)"""
+        return "Set: " + str(self.dict.keys())
+    
+    # represent value with membershp by being a key in self.dict with True value    
+    def add(self, value):
+        self.dict[value] = True
+        
+    # value is in Set if it returns a key in the dictionary
+    def contains(self, value):
+        return value in self.dict # checks value among self.dict keys
+        
+    def remove(self, value):
+        del self.dict[value]
+        
+    # add length    
+    def __len__(self):
+        return len(self.dict.keys())
+        
+# test created Set object
+s1 = Set([1, 2, 2 ,3, 3, 4, 5])
+print s1 # returns [1, 2, 3, 4, 5]
+s1.add(6) # add 6
+print s1 # returns [1, 2, 3, 4, 5, 6]
+len(s1) # returns 6
+s1.remove(1) # removes 1
+print(s1) # [2, 3, 4, 5, 6]
+
+# Functional Tools, pg 63
+
