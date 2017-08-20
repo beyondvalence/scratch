@@ -255,7 +255,9 @@ safe_x = x or 0
 # if x = None, then safe_x = 0
 
 # all() is True when all elements are truthy, or no elements are falsy
+# all() tests are there any false elements
 # any() is true when one or more elements are truthy
+# any() test are there any true elements
 all([True, 1, {9}]) # True
 all([True, 1, {}]) # False, {} is falsy
 any([True, 1, {}]) # True, True is truthy
@@ -316,11 +318,11 @@ lazy_evens_below_20 = (i for i in lazy_range(20) if i % 2 == 0)
 # for lazy dict, use iteritems() method lazily yields key:value pairs one at a time,
 # instead of items()
 square_dict = {x: x * x for x in range(5)}
-square_values = [y for (x, y) in square_dict.iteritems()]
+square_values = [y for (x, y) in square_dict.iteritems()] # outputs square values
 
 # Randomness pg 60
 import random
-four_uniform_randoms = [random.random() for _ in range(4)] # four random numbers (0, 1)
+four_uniform_randoms = [random.random() for _ in range(4)] # four random numbers between 0 and 1
 
 # for reproducibility, set the seed
 random.seed(10) # sets the seed
@@ -328,3 +330,24 @@ print random.random()
 random.seed(10) # resets the seed
 print random.random() # now same as previous
 
+# use randrange method to choose randomly from set range
+random.randrange(10) # from 0 to 9
+random.randrange(3, 9) # from 3 to 8
+
+# random shuffle reorders list elements randomly
+uptoten = range(10)
+random.shuffle(uptoten)
+print uptoten
+
+# use choice to pick element randomly from list
+random.choice(["Alice", "Bob", "Chris", "David"]) # Chris for me
+
+# sample without replacement (lottery example)
+lottery_numbers = range(60)
+winning_numbers = random.sample(lottery_numbers, 6) # list then sample size
+print winning_numbers
+
+# sample with replacement, use multiple random.choice calls
+with_replacement = [random.choice(range(10)) for _ in range(4)] # choose 4 from 0..9
+
+# Regular Expressions pg 61
