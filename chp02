@@ -481,6 +481,26 @@ for i in range(len(documents)): do_something(i) # not pythonic
 for i , _ in enumerate(documents): do_something(i) # pythonic
 
 # zip and argument unpacking pg 66
+# zip transforms multiple lists into single list of tuples
+# with corresponding elements
+list1 = ['a', 'b', 'c', 'd']
+list2 = [3, 2, 1]
+list3 = ['herro', 'dere', 'hehe']
+zipped_list = zip(list1, list2, list3) 
+print zipped_list
+# only zips up to available elements
 
+# can also unzip using arguments
+one, two, three = zip(*zipped_list)
+print one
+print three
+
+# another unpacking trick
+def add(a, b): return a + b
+add(3, 4) # 7
+add([3, 4]) # type error
+add(*[3, 4]) # 7 with unpacking
+
+# args and kwargs, pg 67
 
 
