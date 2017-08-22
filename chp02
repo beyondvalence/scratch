@@ -466,5 +466,21 @@ x_evens = list_evener(xs)
 x_product = reduce(multiply, xs) # 1 * 2 * 3 * 4 = 24
 list_product = partial(reduce, multiply)
 x_product = list_product(xs)
+
+# enumerate pg 65
+# not pythonic
+for i in range(len(documents)):
+    document = documents[i]
+    do_something(i, document)
     
+# using enumerate
+for i, document in enumerate(documents):
+    do_something(i, document)
+# just want indexes
+for i in range(len(documents)): do_something(i) # not pythonic
+for i , _ in enumerate(documents): do_something(i) # pythonic
+
+# zip and argument unpacking pg 66
+
+
 
