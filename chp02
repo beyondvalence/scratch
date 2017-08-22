@@ -502,5 +502,50 @@ add([3, 4]) # type error
 add(*[3, 4]) # 7 with unpacking
 
 # args and kwargs, pg 67
+# creating higher order functions
+def doubler(f):
+    def g(x):
+        return 2 * f(x)
+    return g
 
+# this works in some cases:
+def f1(x):
+    return x + 1
+h = doubler(f1) 
+h(1) # 4
+h(0) # 2
+h(-1) # 0
+# but not this:
+def f2(x, y):
+    return x + y
+x = doubler(f2)
+x(1, 1) # g only takes 1 argument
 
+# a little bit of unpacking
+def magic(*args, **kwargs):
+    print "unnamed args:", args
+    print "keyword args:", kwargs
+
+magic(1, 2, one = 'hello', two = 'dere')
+# prints:
+# unnamed: (1, 2) # tuple
+# keyword args: {'one': 'hello', 'two': 'dere'} # dict
+
+# works other way as well, in passing tuples (or lists) and dicts
+def other_way(x, y, z):
+    return x + y + z
+x_y_list = [10, 2]
+z_dict = {'z': 4}
+other_way(*x_y_list, **z_dict) # yields 16
+
+# the correct doubler:
+def f2(x, y):
+    return x + y
+    
+def correct_doubler(f):
+    def g1(*args, **kwargs):
+        return 2 * f(*args, **kwargs)
+    return g1
+
+try_again = correct_doubler(f2) # is g1 object
+try_again(3, 4) # 14
