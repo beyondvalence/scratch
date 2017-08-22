@@ -455,4 +455,16 @@ def is_even(x):
     """Return true if x is even, false if x is odd"""
     return x % 2 == 0
     
+x_evens = [x for x in xs if is_even(x)] # [2, 4]
+x_evens = filter(is_even, xs)
+# use partial
+list_evener = partial(filter, is_even)
+x_evens = list_evener(xs)
+
+# reduce combines first two elements of list then third
+# then fourth and so on
+x_product = reduce(multiply, xs) # 1 * 2 * 3 * 4 = 24
+list_product = partial(reduce, multiply)
+x_product = list_product(xs)
+    
 
